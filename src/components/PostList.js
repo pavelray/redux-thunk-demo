@@ -5,11 +5,12 @@ import {fetchPost} from '../actions';
 
 export class PostList extends Component {
   
-    componentDidMount(){
-        this.props.fetchPost();
-    }
+  componentDidMount(){
+      this.props.fetchPost();
+  }
   
   render() {
+    console.log(this.props.posts);
     return (
       <div>
         Hello
@@ -18,6 +19,12 @@ export class PostList extends Component {
   }
 }
 
+
+const mapStateToProps = (state) =>{
+  //console.log(state);
+  return {posts:state.posts}
+}
+
 const mapDispatchToProps = (dispatch) =>  bindActionCreators({fetchPost},dispatch);
 
-export default connect(null,mapDispatchToProps)(PostList);
+export default connect(mapStateToProps,mapDispatchToProps)(PostList);
