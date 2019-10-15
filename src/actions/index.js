@@ -1,9 +1,13 @@
 import jsonPlaceHolder from "../apis/jsonPlaceHolder";
 import _ from 'lodash';
 
-
+//Solution 2
+// This will get all the posts and based on the posts get the matching users
+// getState - function exsists in redux store and get access to all the data that are present in redux store
+// _.map - works same as js map and select the userId from all the posts
+// _.uniq returns all the uniq userId from the posts
 export const fetchPostAndUsers = () => async (dispatch,getState) => {
-    await dispatch(fetchPost());
+    await dispatch(fetchPosts());
 
     const userIds = _.uniq(_.map(getState().posts,'userId'));
     userIds.forEach(id=> dispatch(fetchUser(id)));

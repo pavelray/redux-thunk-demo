@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 
 export class UserHeader extends Component {
 
-    
-
     render() {
         const {user} = this.props;
         if(!user){
