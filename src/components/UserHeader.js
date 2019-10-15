@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {fetchUser} from '../actions';
 
 export class UserHeader extends Component {
 
-    componentDidMount(){
-        this.props.fetchUser(this.props.userId);
-    }
+    
 
     render() {
+        const {user} = this.props;
+        if(!user){
+            return null;
+        }
         return (
-        <div>
-            User UserHeader
+        <div className="header">
+            {user.name}
         </div>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) =>  bindActionCreators({fetchUser},dispatch);
+const mapStateToProps=(state,ownProps)=>{
+    return {user:state.user.find(x=> x.id === ownProps.userId)}
+}
 
-export default connect(null,mapDispatchToProps)(UserHeader)
+
+export default connect(mapStateToProps)(UserHeader)
